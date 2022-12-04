@@ -131,7 +131,7 @@ function initialize()
 	markerRoot1.add( mesh1 );
 	
 	// the invisibility cloak (box with a hole)
-	let geometry0 = new THREE.BoxGeometry(2,2,2);
+	let geometry0 = new THREE.BoxGeometry(1,1,1);
 	geometry0.faces.splice(4, 2); // make hole by removing top two triangles
 	
 	let material0 = new THREE.MeshBasicMaterial({
