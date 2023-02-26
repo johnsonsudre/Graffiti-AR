@@ -21,6 +21,7 @@ function initialize() {
   renderer = new THREE.WebGLRenderer({
     antialias: true,
     alpha: true,
+    preserveDrawingBuffer: true,
   });
   renderer.setClearColor(new THREE.Color("lightgrey"), 0);
   renderer.setSize(640, 480);
@@ -103,20 +104,36 @@ function initialize() {
   mesh1 = new THREE.Mesh(geometry1, material1);
   mesh1.position.y = -1;
 
+  mesh2 = createMesh();
+  mesh1.add(mesh2);
+
   markerRoot1.add(mesh1);
 
   // the invisibility cloak (box with a hole)
-  let geometry0 = new THREE.BoxGeometry(1, 1, 1);
-  geometry0.faces.splice(4, 2); // make hole by removing top two triangles
+  // let geometry0 = new THREE.BoxGeometry(1, 1, 1);
+  // geometry0.faces.splice(4, 2); // make hole by removing top two triangles
 
-  let material0 = new THREE.MeshBasicMaterial({
-    colorWrite: false,
-  });
+  // let material0 = new THREE.MeshBasicMaterial({
+  //   colorWrite: false,
+  // });
 
-  let mesh0 = new THREE.Mesh(geometry0, material0);
-  mesh0.scale.set(1, 1, 1).multiplyScalar(1.01);
-  mesh0.position.y = -1;
-  markerRoot1.add(mesh0);
+  // let mesh0 = new THREE.Mesh(geometry0, material0);
+  // mesh0.scale.set(1, 1, 1).multiplyScalar(1.01);
+  // mesh0.position.y = -1;
+  // markerRoot1.add(mesh0);
+
+  ////////////////////////////////////////////////////////////
+  // setup particles
+  ////////////////////////////////////////////////////////////
+  particle = new ParticleCloud(scene);
+
+  ////////////////////////////////////////////////////////////
+  // presentation
+  ////////////////////////////////////////////////////////////
+  presentation = new Presentation(scene);
+  presentation.add();
+  console.log(presentation.assets.children[0]);
+  // markerRoot1.add(presentation.assets);
 }
 
 function update() {
@@ -133,6 +150,7 @@ function animate() {
   requestAnimationFrame(animate);
   deltaTime = clock.getDelta();
   totalTime += deltaTime;
+  particle.update(0.01);
   update();
   render();
 }
