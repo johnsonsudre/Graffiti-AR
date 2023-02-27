@@ -8,7 +8,7 @@ function createMesh() {
 
   const newMesh = new THREE.Mesh(geometry, material);
   newMesh.position.setZ(-3);
-  console.log(newMesh);
+  // console.log(newMesh);
   
   return newMesh;
 }

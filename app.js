@@ -9,6 +9,22 @@ var mesh1;
 initialize();
 animate();
 
+function planeFromImage(url) {
+  // cria um plano a partir da textura
+  let loader = new THREE.TextureLoader();
+  let texture = loader.load(url);
+  let material = new THREE.MeshLambertMaterial({
+    transparent: true,
+    map: texture,
+    side: THREE.BackSide,
+  });
+
+  let geometry = new THREE.PlaneGeometry(1, 1);
+  let mesh = new THREE.Mesh(geometry, material);
+  mesh.rotation.x = 90;
+  return mesh;
+}
+
 function initialize() {
   scene = new THREE.Scene();
 
@@ -104,7 +120,8 @@ function initialize() {
   mesh1 = new THREE.Mesh(geometry1, material1);
   mesh1.position.y = -1;
 
-  mesh2 = createMesh();
+  mesh2 = planeFromImage("./images/Interaction/zacimba.png");
+  console.log(mesh2);
   mesh1.add(mesh2);
 
   markerRoot1.add(mesh1);
@@ -132,7 +149,7 @@ function initialize() {
   ////////////////////////////////////////////////////////////
   presentation = new Presentation(scene);
   presentation.add();
-  console.log(presentation.assets.children[0]);
+  // console.log(presentation.assets.children[0]);
   // markerRoot1.add(presentation.assets);
 }
 
