@@ -1,0 +1,29 @@
+{
+  "name": "graffiti-ar",
+  "version": "1.0.0",
+  "description": "ar app for graffiti",
+  "main": "app.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnsonsudre/Graffiti-AR.git"
+  },
+  "keywords": [
+    "ar",
+    "graffiti",
+    "digital",
+    "art"
+  ],
+  "author": "johnson sudre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johnsonsudre/Graffiti-AR/issues"
+  },
+  "homepage": "https://github.com/johnsonsudre/Graffiti-AR#readme",
+  "devDependencies": {
+    "vite": "^4.1.4"
+  }
+}
