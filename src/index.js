@@ -92,7 +92,7 @@ function initialize() {
     // black_region: Black bordered markers on a white background, white_region: White bordered markers on a black background
     // labelingMode: "black_region",
     // url of the camera parameters
-    cameraParametersUrl: "data/camera_para.dat",
+    cameraParametersUrl: "/src/data/camera_para.dat",
     // tune the maximum rate of pose detection in the source image
     // maxDetectionRate: 30,
     // // resolution of at which we detect pose in the source image
@@ -125,7 +125,7 @@ function initialize() {
       // type of marker - ['pattern', 'barcode', 'unknown' ]
       type: "pattern",
       // url of the pattern - IIF type='pattern'
-      patternUrl: "data/ananse-ntontan.patt",
+      patternUrl: "/src/data/ananse-ntontan.patt",
       // value of the barcode - IIF type='barcode'
       // barcodeValue: null,
       // change matrix mode - [modelViewMatrix, cameraTransformMatrix]
@@ -143,15 +143,12 @@ function initialize() {
 
   var markerModel = new THREE.Object3D();
 
-//   var meshZacimba = imageAsPlane("./assets/images/Interaction/zacimba.png");
-//   markerModel.add(meshZacimba);
-
   var loader = new THREE.GLTFLoader();
   loader.crossOrigin = true;
   console.log(loader);
 
   loader.load(
-    "./assets/animations/graffiti animado - zacimba.glb",
+    "/src/assets/animations/graffiti animado - zacimba.glb",
     function (data) {
       var object = data.scene;
       object.rotation.x = Math.PI / 2;
