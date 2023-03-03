@@ -16,18 +16,17 @@ body {
 
 @font-face {
   font-family: "DonGraffitiRegular";
-  src: url("./public/assets//fonts/DonGraffiti.otf") format("opentype");
+  src: url("./public/assets//fonts/Urban_slick.ttf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
 h1 {
   text-shadow: 2px 2px 2px #333;
-  letter-spacing: 0.2em;
+  /* letter-spacing: 0.2em; */
   font-size: 6em;
   margin-top: 50px;
   font-family: "DonGraffitiRegular", sans-serif;
-  src: url("./public/assets/fonts/DonGraffiti.otf");
 }
 
 .button-container {
