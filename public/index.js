@@ -9,10 +9,10 @@ animate();
 const arButton = document.getElementById('ar-button');
 const introDiv = document.getElementById('intro');
 
-console.log(arButton);
-
 arButton.addEventListener('click', () => {
   introDiv.style.display = 'none';
+  arToolkitSource.domElement.style.display = "block";
+
 });
 
 
@@ -56,8 +56,6 @@ function initialize() {
   console.log(renderer.domElement.style);
   document.body.appendChild(renderer.domElement);
 
-  console.log(document.body);
-
   clock = new THREE.Clock();
   deltaTime = 0;
   totalTime = 0;
@@ -75,6 +73,7 @@ function initialize() {
     arToolkitSource.onResizeElement();
     arToolkitSource.copyElementSizeTo(renderer.domElement);
     if (arToolkitContext.arController !== null) {
+      arToolkitSource.domElement.style.display = "none";
       arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas);
     }
   }
