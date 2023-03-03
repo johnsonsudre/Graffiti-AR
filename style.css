@@ -15,8 +15,15 @@ body {
 }
 
 @font-face {
-  font-family: "DonGraffitiRegular";
+  font-family: "UrbanSlick";
   src: url("./public/assets//fonts/Urban_slick.ttf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DonGraffiti";
+  src: url("./public/assets//fonts/DonGraffiti.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
@@ -24,9 +31,8 @@ body {
 h1 {
   text-shadow: 2px 2px 2px #333;
   /* letter-spacing: 0.2em; */
-  font-size: 6em;
   margin-top: 50px;
-  font-family: "DonGraffitiRegular", sans-serif;
+  font-family: "UrbanSlick", sans-serif;
 }
 
 .button-container {
@@ -37,12 +43,13 @@ h1 {
 }
 
 button {
+  letter-spacing: 0.15em;
+  font-family: "DonGraffiti", sans-serif;
   background-color: #2980b9;
   color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  font-size: 1.5em;
   margin-top: 20px;
   cursor: pointer;
 }
@@ -62,20 +69,21 @@ button {
 }
 
 .icon-ar {
-  background-image: url("ar.svg");
+  background-image: url("./public//assets/icons/ar.svg");
   background-repeat: no-repeat;
   background-size: contain;
   fill: #ffffff;
-  height: 128px;
-  width: 128px;
+  height: 4rem;
+  width: 4rem;
 }
 
 .icon-sobre {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/4298/4298627.png");
+  background-image: url("./public//assets/icons/info.svg");
   background-repeat: no-repeat;
   background-size: contain;
-  height: 128px;
-  width: 128px;
+  background-position: center;
+  height: 4rem;
+  width: 4rem;  
 }
 
 .button-sizing {
@@ -94,4 +102,64 @@ button {
 #ar-button,
 #sobre-button {
   width: auto;
+}
+
+/* smartphones */
+@media screen and (max-width: 767px) {
+  h1 {
+    font-size:3em; /* equivalente a 24px */
+  }
+
+  button {
+    font-size:2em;
+  }
+}
+
+/* tablets */
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 6em; /* equivalente a 32px */
+  }
+
+  button {
+    font-size:3em;
+  }
+}
+
+/* animações */
+.psicodelico {
+  background: linear-gradient(45deg, #ff00ff, #00ffff, #001aff, #ff0073);
+  background-size: 600% 600%;
+  animation: gradient 10s ease infinite;
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.psicodelico::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+  filter: blur(20px);
+  z-index: -1;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
