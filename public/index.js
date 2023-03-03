@@ -6,6 +6,16 @@ var mesh;
 initialize();
 animate();
 
+const arButton = document.getElementById('ar-button');
+const introDiv = document.getElementById('intro');
+
+console.log(arButton);
+
+arButton.addEventListener('click', () => {
+  introDiv.style.display = 'none';
+});
+
+
 function imageAsPlane(url) {
   // cria um plano a partir da textura informada
   let loader = new THREE.TextureLoader();
@@ -42,7 +52,11 @@ function initialize() {
   renderer.domElement.style.position = "absolute";
   renderer.domElement.style.top = "0px";
   renderer.domElement.style.left = "0px";
+  renderer.domElement.style["z-index"] = -1;
+  console.log(renderer.domElement.style);
   document.body.appendChild(renderer.domElement);
+
+  console.log(document.body);
 
   clock = new THREE.Clock();
   deltaTime = 0;

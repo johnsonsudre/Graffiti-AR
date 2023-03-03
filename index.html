@@ -1,29 +1,68 @@
 <!DOCTYPE html>
-<head>
-	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<title>GraffitiAR</title>
-	<link rel="icon" type="image/svg+xml" href="favicon.ico" />
-	<!-- include three.js library -->
-	<script src='vendor/three.js'></script>
-	<script src="vendor/GLTFLoader.js"></script>
-	<!-- include jsartookit -->
-	<script src="vendor/jsartoolkit5/artoolkit.min.js"></script>
-	<script src="vendor/jsartoolkit5/artoolkit.api.js"></script>
-	<!-- include threex.artoolkit -->
-	<script src="vendor/threex/threex-artoolkitsource.js"></script>
-	<script src="vendor/threex/threex-artoolkitcontext.js"></script>
-	<script src="vendor/threex/threex-arbasecontrols.js"></script>
-	<script src="vendor/threex/threex-armarkercontrols.js"></script>
+<html>
+  <head>
+    <meta
+      name="viewport"
+      charset="UTF-8"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <title>GraffitiAR</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.ico" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- include three.js library -->
+    <script src="vendor/three.js"></script>
+    <script src="vendor/GLTFLoader.js"></script>
+    <!-- include jsartookit -->
+    <script src="vendor/jsartoolkit5/artoolkit.min.js"></script>
+    <script src="vendor/jsartoolkit5/artoolkit.api.js"></script>
+    <!-- include threex.artoolkit -->
+    <script src="vendor/threex/threex-artoolkitsource.js"></script>
+    <script src="vendor/threex/threex-artoolkitcontext.js"></script>
+    <script src="vendor/threex/threex-arbasecontrols.js"></script>
+    <script src="vendor/threex/threex-armarkercontrols.js"></script>
+  </head>
 
-
-
-</head>
-
-<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
-
-<script src="js/particles.js"></script>
-<script src="js/infoShow.js"></script>
-<script src="index.js"></script>
-
-</body>
+  <body style="margin: 0px; overflow: hidden; font-family: Monospace">
+    <div
+      id="intro"
+      style="
+        background-image: url('./public/assets/images/fundo-abstrato-de-marmore-liquido-azul.jpg');
+        background-size: cover;
+        background-position: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <div
+        style="
+          margin: 100px;
+          overflow: hidden;
+          font-family: Monospace;
+          z-index: 10;
+        "
+      >
+        <h2>Projeto de arte digital</h2>
+        <h1>Graffiti <br>em movimento</h1>
+        <div class="button-container">
+          <button id="ar-button">
+            <span class="button-icon icon-ar"></span>
+            Graffiti / Realidade Aumentada
+          </button>
+          <button id="sobre-button">
+            <span class="button-icon icon-sobre"></span>
+            Sobre o projeto
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="js/particles.js"></script>
+    <script src="js/infoShow.js"></script>
+    <script src="index.js"></script>
+  </body>
 </html>

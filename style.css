@@ -1,0 +1,98 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #2c3e50;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+@font-face {
+  font-family: "DonGraffitiRegular";
+  src: url("./public/assets//fonts/DonGraffiti.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1 {
+  text-shadow: 2px 2px 2px #333;
+  letter-spacing: 0.2em;
+  font-size: 6em;
+  margin-top: 50px;
+  font-family: "DonGraffitiRegular", sans-serif;
+  src: url("./public/assets/fonts/DonGraffiti.otf");
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+button {
+  background-color: #2980b9;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1.5em;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+#ar-button {
+  background-color: #3498db;
+}
+
+#sobre-button {
+  background-color: #2ecc71;
+}
+
+.button-icon {
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.icon-ar {
+  background-image: url("ar.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  fill: #ffffff;
+  height: 128px;
+  width: 128px;
+}
+
+.icon-sobre {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/4298/4298627.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 128px;
+  width: 128px;
+}
+
+.button-sizing {
+  display: inline-block;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.button-sizing button {
+  display: inline-block;
+  width: auto;
+}
+
+#ar-button,
+#sobre-button {
+  width: auto;
+}
