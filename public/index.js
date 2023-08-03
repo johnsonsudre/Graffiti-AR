@@ -159,7 +159,7 @@ function initialize() {
   // console.log(loader);
 
   loader.load(
-    "/assets/animations/graffiti animado - zacimba - v3.glb",
+    "../public/assets/animations/graffiti-animado-v4.glb",
     function (data) {
       var object = data.scene;
       object.rotation.x = Math.PI / 2;
