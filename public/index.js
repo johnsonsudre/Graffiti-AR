@@ -158,15 +158,12 @@ function initialize() {
   loader.crossOrigin = true;
   // console.log(loader);
 
-  loader.load(
-    "../public/assets/animations/graffiti-animado-v4.glb",
-    function (data) {
-      var object = data.scene;
-      object.rotation.x = Math.PI / 2;
-      object.rotation.y = Math.PI;
-      markerModel.add(object);
-    }
-  );
+  loader.load("/assets/animations/graffiti-animado-v4.glb", function (data) {
+    var object = data.scene;
+    object.rotation.x = Math.PI / 2;
+    object.rotation.y = Math.PI;
+    markerModel.add(object);
+  });
 
   markerZacimba.add(markerModel);
 
