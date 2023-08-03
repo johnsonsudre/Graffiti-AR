@@ -73,6 +73,11 @@ function initialize() {
     if (arToolkitContext.arController !== null) {
       arToolkitSource.domElement.style.display = "none";
       arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas);
+      arToolkitContext.arController.canvas.setAttribute(
+        "willReadFrequently",
+        "true"
+      );
+      console.log(arToolkitContext.arController.canvas);
     }
   }
 
