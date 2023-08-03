@@ -159,7 +159,7 @@ function initialize() {
   // console.log(loader);
 
   loader.load(
-    "../public/assets/fonts/animations/graffiti animado - zacimba - v3.glb",
+    "/assets/animations/graffiti animado - zacimba - v3.glb",
     function (data) {
       var object = data.scene;
       object.rotation.x = Math.PI / 2;
@@ -173,7 +173,7 @@ function initialize() {
   ////////////////////////////////////////////////////////////
   // setup particles
   ////////////////////////////////////////////////////////////
-  particle = new ParticleCloud(scene, "../public/assets/images/dust.png");
+  particle = new ParticleCloud(scene, "/assets/images/dust.png");
 
   ////////////////////////////////////////////////////////////
   // presentation
