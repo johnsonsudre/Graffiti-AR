@@ -6,15 +6,13 @@ var mesh;
 initialize();
 animate();
 
-const arButton = document.getElementById('ar-button');
-const introDiv = document.getElementById('intro');
+const arButton = document.getElementById("ar-button");
+const introDiv = document.getElementById("intro");
 
-arButton.addEventListener('click', () => {
-  introDiv.style.display = 'none';
+arButton.addEventListener("click", () => {
+  introDiv.style.display = "none";
   arToolkitSource.domElement.style.display = "block";
-
 });
-
 
 function imageAsPlane(url) {
   // cria um plano a partir da textura informada
@@ -53,7 +51,7 @@ function initialize() {
   renderer.domElement.style.top = "0px";
   renderer.domElement.style.left = "0px";
   renderer.domElement.style["z-index"] = -1;
-  console.log(renderer.domElement.style);
+  // console.log(renderer.domElement.style);
   document.body.appendChild(renderer.domElement);
 
   clock = new THREE.Clock();
@@ -94,7 +92,7 @@ function initialize() {
   // create atToolkitContext
   arToolkitContext = new THREEx.ArToolkitContext({
     // debug - true if one should display artoolkit debug canvas, false otherwise
-    debug: true,
+    // debug: true,
     // the mode of detection - ['color', 'color_and_matrix', 'mono', 'mono_and_matrix']
     detectionMode: "mono",
     // type of matrix code - valid iif detectionMode end with 'matrix' - [3x3, 3x3_HAMMING63, 3x3_PARITY65, 4x4, 4x4_BCH_13_9_3, 4x4_BCH_13_5_5]
@@ -144,13 +142,13 @@ function initialize() {
       // change matrix mode - [modelViewMatrix, cameraTransformMatrix]
       changeMatrixMode: "modelViewMatrix",
       // turn on/off camera smoothing
-      smooth: true,
+      // smooth: true,
       // number of matrices to smooth tracking over, more = smoother but slower follow
-      smoothCount: 5,
+      // smoothCount: 5,
       // distance tolerance for smoothing, if smoothThreshold # of matrices are under tolerance, tracking will stay still
-      smoothTolerance: 0.01,
+      // smoothTolerance: 0.01,
       // threshold for smoothing, will keep still unless enough matrices are over tolerance
-      smoothThreshold: 2,
+      // smoothThreshold: 2,
     }
   );
 
@@ -158,10 +156,10 @@ function initialize() {
 
   var loader = new THREE.GLTFLoader();
   loader.crossOrigin = true;
-  console.log(loader);
+  // console.log(loader);
 
   loader.load(
-    "assets/animations/graffiti animado - zacimba.glb",
+    "../public/assets/fonts/animations/graffiti animado - zacimba - v3.glb",
     function (data) {
       var object = data.scene;
       object.rotation.x = Math.PI / 2;
@@ -175,7 +173,7 @@ function initialize() {
   ////////////////////////////////////////////////////////////
   // setup particles
   ////////////////////////////////////////////////////////////
-  particle = new ParticleCloud(scene);
+  particle = new ParticleCloud(scene, "../public/assets/images/dust.png");
 
   ////////////////////////////////////////////////////////////
   // presentation

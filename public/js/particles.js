@@ -1,15 +1,23 @@
 // Crie a classe da nuvem de partículas
 class ParticleCloud {
-  constructor(scene) {
+  constructor(scene, imgUrl) {
+    this.image = imgUrl;
     this.scene = scene;
     this.particleCount = 1000;
+
+    let loaderTexture = new THREE.TextureLoader();
+    this.particleTexture = loaderTexture.load(imgUrl, (texture) => {
+      console.log(texture);
+    });
+
     this.particleGeometry = new THREE.Geometry();
     this.particleMaterial = new THREE.PointsMaterial({
       color: 0xffffff,
       size: 1,
-      // map: new THREE.TextureLoader().load('path/to/particle/texture.png'),
+      map: new THREE.TextureLoader().load(imgUrl),
       blending: THREE.AdditiveBlending,
       transparent: true,
+      opacity: 0.25,
     });
     this.particles = new THREE.Points(
       this.particleGeometry,
@@ -24,9 +32,7 @@ class ParticleCloud {
       const x = Math.random() * 100 - 50;
       const y = Math.random() * 100 - 50;
       const z = Math.random() * 100 - 100;
-      const color =
-        "#" + (Math.random() * 0xfffff * 1000000).toString(16).slice(0, 6);
-      this.particleMaterial.color.set(color);
+      // this.particleMaterial.color.set(color);
       this.particleGeometry.vertices.push(new THREE.Vector3(x, y, z));
     }
     this.scene.add(this.particles);
