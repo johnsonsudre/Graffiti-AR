@@ -63,7 +63,7 @@ function initialize() {
   ////////////////////////////////////////////////////////////
 
   arToolkitSource = new THREEx.ArToolkitSource({
-    // type of source - ['webcam', 'image', 'video']
+    // tipo de fonte - ['webcam', 'image', 'video']
     sourceType: "webcam",
   });
 
@@ -77,7 +77,7 @@ function initialize() {
         "willReadFrequently",
         "true"
       );
-      console.log(arToolkitContext.arController.canvas);
+      // console.log(arToolkitContext.arController.canvas);
     }
   }
 
@@ -85,50 +85,51 @@ function initialize() {
     onResize();
   });
 
-  // handle resize event
+  // lida com evento de redimensionamento
   window.addEventListener("resize", function () {
     onResize();
   });
 
   ////////////////////////////////////////////////////////////
-  // setup arToolkitContext
+  // configurar arToolkitContext
   ////////////////////////////////////////////////////////////
 
-  // create atToolkitContext
+  // criar atToolkitContext
   arToolkitContext = new THREEx.ArToolkitContext({
-    // debug - true if one should display artoolkit debug canvas, false otherwise
+    // debug - verdadeiro se for necessário exibir a tela de depuração do artoolkit, caso contrário, falso
     // debug: true,
-    // the mode of detection - ['color', 'color_and_matrix', 'mono', 'mono_and_matrix']
+    // o modo de detecao - ['color', 'color_and_matrix', 'mono', 'mono_and_matrix']
     detectionMode: "mono",
     // type of matrix code - valid iif detectionMode end with 'matrix' - [3x3, 3x3_HAMMING63, 3x3_PARITY65, 4x4, 4x4_BCH_13_9_3, 4x4_BCH_13_5_5]
+    // tipo do código de matriz - tipo de código de matriz - válido se o detectionMode terminar com 'matrix' - [3x3, 3x3_HAMMING63, 3x3_PARITY65, 4x4, 4x4_BCH_13_9_3, 4x4_BCH_13_5_5]
     matrixCodeType: "4x4",
-    // Pattern ratio for custom markers
+    // Taxa de padrão para marcadores personalizados
     patternRatio: 0.5,
-    // Labeling mode for markers - ['black_region', 'white_region']
-    // black_region: Black bordered markers on a white background, white_region: White bordered markers on a black background
+    // Modo de rotulagem para marcadores - ['black_region', 'white_region']
+    // // black_region: Marcadores com borda preta sobre fundo branco, white_region: Marcadores com borda branca sobre fundo preto
     // labelingMode: "black_region",
-    // url of the camera parameters
+    // URL dos parâmetros da câmera
     cameraParametersUrl: "data/camera_para.dat",
-    // tune the maximum rate of pose detection in the source image
+    // ajusta a taxa máxima de detecção de pose na imagem de origem
     // maxDetectionRate: 30,
-    // // resolution of at which we detect pose in the source image
+    // // resolução na qual detectamos a pose na imagem de origem
     // canvasWidth: 640,
     // canvasHeight: 480,
-    // enable image smoothing or not for canvas copy - default to true
+    // habilitar a suavização de imagem ou não para cópia de tela - padrão para verdadeiro
     // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/imageSmoothingEnabled
     imageSmoothingEnabled: true,
   });
 
-  // copy projection matrix to camera when initialization complete
+  // copia a matriz de projeção para a câmera quando a inicialização é concluída
   arToolkitContext.init(function onCompleted() {
     camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
   });
 
   ////////////////////////////////////////////////////////////
-  // setup markerRoots
+  // configura markerRoots
   ////////////////////////////////////////////////////////////
 
-  // build markerControls
+  // constroi markerControls
   markerZacimba = new THREE.Group();
   markerZacimba.name = "zacimba";
   scene.add(markerZacimba);
@@ -136,23 +137,23 @@ function initialize() {
     arToolkitContext,
     markerZacimba,
     {
-      // size of the marker in meter
+      // tamanho do marcador em metro
       // size: 1,
-      // type of marker - ['pattern', 'barcode', 'unknown' ]
+      // tipo de marcador - ['pattern', 'barcode', 'unknown' ]
       type: "pattern",
-      // url of the pattern - IIF type='pattern'
+      // url do padrão - SE type='pattern'
       patternUrl: "data/ananse-ntontan.patt",
-      // value of the barcode - IIF type='barcode'
+      // valor da barra de codigo - SE type='barcode'
       // barcodeValue: null,
-      // change matrix mode - [modelViewMatrix, cameraTransformMatrix]
+      // muda o modo de matriz - [modelViewMatrix, cameraTransformMatrix]
       changeMatrixMode: "modelViewMatrix",
-      // turn on/off camera smoothing
+      // ativar/desativar a suavização da câmera
       // smooth: true,
-      // number of matrices to smooth tracking over, more = smoother but slower follow
+      // número de matrizes para suavizar o rastreamento, mais = acompanhamento mais suave, mas mais lento
       // smoothCount: 5,
-      // distance tolerance for smoothing, if smoothThreshold # of matrices are under tolerance, tracking will stay still
+      // tolerância de distância para suavização, se # de matrizes smoothThreshold estiver abaixo da tolerância, o rastreamento permanecerá parado
       // smoothTolerance: 0.01,
-      // threshold for smoothing, will keep still unless enough matrices are over tolerance
+      // limite para suavização, permanecerá imóvel, a menos que matrizes suficientes estejam acima da tolerância
       // smoothThreshold: 2,
     }
   );
@@ -163,6 +164,7 @@ function initialize() {
   loader.crossOrigin = true;
   // console.log(loader);
 
+  // carrega ambiente
   loader.load("/assets/animations/graffiti-animado-v4.glb", function (data) {
     var object = data.scene;
     object.rotation.x = Math.PI / 2;
@@ -173,12 +175,12 @@ function initialize() {
   markerZacimba.add(markerModel);
 
   ////////////////////////////////////////////////////////////
-  // setup particles
+  // configura particulas
   ////////////////////////////////////////////////////////////
   particle = new ParticleCloud(scene, "/assets/images/dust.png");
 
   ////////////////////////////////////////////////////////////
-  // presentation
+  // cria informacoes interativas
   ////////////////////////////////////////////////////////////
   presentation = new Presentation(scene);
   presentation.add();

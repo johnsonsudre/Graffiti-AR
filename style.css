@@ -119,16 +119,20 @@ button {
   button {
     font-size: 2em;
   }
+
   .logo {
     width: 100%;
     height: 100%;
   }
+
   .conteudo {
     padding: 40px;
   }
+
   #intro {
     background-position: -160px;
   }
+
   #ar-button {
     margin-bottom: 120%;
   }
