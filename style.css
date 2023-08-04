@@ -109,6 +109,7 @@ button {
   align-items: center; /* Centralizar verticalmente */
   flex-direction: column; /* Alinhar os itens verticalmente */
 }
+
 /* smartphones */
 @media screen and (max-width: 767px) {
   h1 {
@@ -129,7 +130,7 @@ button {
     background-position: -160px;
   }
   #ar-button {
-    margin-bottom: 160%;
+    margin-bottom: 120%;
   }
 }
 
@@ -153,9 +154,11 @@ button {
     align-items: center;
     justify-content: center;
   }
+
   #intro {
     background-position: 0px;
   }
+
   #ar-button {
     margin-bottom: 10%;
   }
