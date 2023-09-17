@@ -142,7 +142,8 @@ function initialize() {
       // tipo de marcador - ['pattern', 'barcode', 'unknown' ]
       type: "pattern",
       // url do padrão - SE type='pattern'
-      patternUrl: "data/ananse-ntontan.patt",
+      // patternUrl: "data/ananse-ntontan.patt",
+      patternUrl: "data/new-marker/pattern-adinkra-ananse-ntontan.patt",
       // valor da barra de codigo - SE type='barcode'
       // barcodeValue: null,
       // muda o modo de matriz - [modelViewMatrix, cameraTransformMatrix]
