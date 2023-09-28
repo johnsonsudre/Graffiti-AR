@@ -2,6 +2,8 @@
 //		Inicia Threejs
 //////////////////////////////////////////////////////////////////////////////////
 
+console.log("Inicia app");
+
 var renderer = new THREE.WebGLRenderer({
   antialias: true,
   alpha: true,
