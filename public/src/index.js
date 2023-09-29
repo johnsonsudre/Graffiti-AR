@@ -113,6 +113,14 @@ scene.visible = false;
 var root = new THREE.Object3D();
 scene.add(root);
 
+const axesHelper = new THREE.AxesHelper(5);
+scene.add(axesHelper);
+
+const geometry = new THREE.BoxGeometry(1, 1, 1);
+const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
+
 //////////////////////////////////////////////////////////////////////////////////
 //		add an object in the scene
 //////////////////////////////////////////////////////////////////////////////////
@@ -123,19 +131,19 @@ var model;
 threeGLTFLoader.load("./resources/Flamingo.glb", function (gltf) {
   model = gltf.scene.children[0];
   model.name = "Flamingo";
-  const clips = gltf.animations;
+  // const clips = gltf.animations;
 
-  var animation = gltf.animations[0];
-  var mixer = new THREE.AnimationMixer(gltf.scene);
-  mixers.push(mixer);
-  const clip = THREE.AnimationClip.findByName(clips, "flamingo_flyA_");
-  var action = mixer.clipAction(clip);
-  action.play();
+  // var animation = gltf.animations[0];
+  // var mixer = new THREE.AnimationMixer(gltf.scene);
+  // mixers.push(mixer);
+  // const clip = THREE.AnimationClip.findByName(clips, "flamingo_flyA_");
+  // var action = mixer.clipAction(clip);
+  // action.play();
 
   root.matrixAutoUpdate = false;
   root.add(model);
 
-  model.position.z = -100;
+  // model.position.z = -100;
   //model.position.z = 100;
 
   window.addEventListener("arjs-nft-init-data", function (nft) {
@@ -152,11 +160,11 @@ threeGLTFLoader.load("./resources/Flamingo.glb", function (gltf) {
   var animate = function () {
     requestAnimationFrame(animate);
 
-    if (mixers.length > 0) {
-      for (var i = 0; i < mixers.length; i++) {
-        mixers[i].update(clock.getDelta());
-      }
-    }
+    // if (mixers.length > 0) {
+    //   for (var i = 0; i < mixers.length; i++) {
+    //     mixers[i].update(clock.getDelta());
+    //   }
+    // }
 
     if (!arToolkitSource.ready) {
       return;
