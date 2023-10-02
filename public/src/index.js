@@ -4,6 +4,8 @@
 
 console.log("Inicia app");
 
+let debug = document.getElementById("debug");
+debug.visible = false;
 var renderer = new THREE.WebGLRenderer({
   antialias: true,
   alpha: true,
@@ -25,6 +27,20 @@ document.body.appendChild(renderer.domElement);
 
 // inicia cena e camera
 var scene = new THREE.Scene();
+scene.visible = false;
+
+//////////////////////////////////////////////////////////////////////////////////
+//		Insere alguns objetos na cena
+//////////////////////////////////////////////////////////////////////////////////
+
+var root = new THREE.Object3D();
+scene.add(root);
+
+const axesHelper = new THREE.AxesHelper(5);
+root.add(axesHelper);
+
+var light = new THREE.AmbientLight(0xffffff);
+scene.add(light);
 
 //////////////////////////////////////////////////////////////////////////////////
 //		Inicia uma camera básica
@@ -32,6 +48,8 @@ var scene = new THREE.Scene();
 
 // Cria uma camera
 var camera = new THREE.Camera();
+camera.near = 0.01;
+camera.far = 10000;
 scene.add(camera);
 
 var light = new THREE.AmbientLight(0xffffff);
@@ -43,8 +61,8 @@ scene.add(light);
 
 var arToolkitSource = new THREEx.ArToolkitSource({
   sourceType: "webcam",
-  sourceWidth: 480,
-  sourceHeight: 640,
+  // sourceWidth: 480,
+  // sourceHeight: 640,
 });
 
 arToolkitSource.init(function onReady() {
@@ -61,9 +79,9 @@ window.addEventListener("resize", function () {
 
 // listener para carregamento final do marcador NFT
 window.addEventListener("arjs-nft-loaded", function (ev) {
-  console.log(ev);
+  console.log(ev.target);
+  // console.log(ev);
 });
-
 // redimensionador
 function onResize() {
   arToolkitSource.onResizeElement();
@@ -81,12 +99,15 @@ function onResize() {
 var arToolkitContext = new THREEx.ArToolkitContext(
   {
     detectionMode: "mono",
-    canvasWidth: 480,
-    canvasHeight: 640,
+    // canvasWidth: 480,
+    // canvasHeight: 640,
+    // debug: true,
+    maxDetectionRate: 60,
+    imageSmoothingEnabled: true,
   },
   {
-    sourceWidth: 480,
-    sourceHeight: 640,
+    // sourceWidth: 480,
+    // sourceHeight: 640,
   }
 );
 
@@ -102,24 +123,39 @@ arToolkitContext.init(function onCompleted() {
 
 // inicia controles para a camera
 var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
+  // size of the marker in meter
+  size: 0.18,
   type: "nft",
   // descriptorsUrl: "data/dataNFT/pinball",
-  descriptorsUrl: "data/dataGEM/erika",
+  descriptorsUrl: "data/dataTeste/teste3",
   changeMatrixMode: "cameraTransformMatrix",
+  smooth: true,
+  smoothCount: 5,
+  smoothThreshold: 2,
+  smoothTolerance: 0.01,
+  minConfidence: 0.6,
 });
 
-scene.visible = false;
+// cube.position.copy(camera.position);
 
-var root = new THREE.Object3D();
-scene.add(root);
+//////////////////////////////////////////////////////////////////////////////////
+// Adiciona um ouvinte para detectar quando o marcador é rastreado
+//////////////////////////////////////////////////////////////////////////////////
 
-const axesHelper = new THREE.AxesHelper(5);
-scene.add(axesHelper);
+markerControls.addEventListener("markerFound", function (event) {
+  // Acesse o objeto de marcador rastreado
+  var marker = event.target;
+  console.log(marker);
 
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
+  // Obtenha as dimensões do marcador "NFT"
+  // var markerWidth = marker.m_width;
+  // var markerHeight = marker.m_height;
+
+  // console.log("Largura do marcador NFT: " + markerWidth);
+  // console.log("Altura do marcador NFT: " + markerHeight);
+
+  // Agora você pode usar markerWidth e markerHeight conforme necessário
+});
 
 //////////////////////////////////////////////////////////////////////////////////
 //		add an object in the scene
@@ -128,9 +164,9 @@ scene.add(cube);
 var threeGLTFLoader = new THREE.GLTFLoader();
 var model;
 
-threeGLTFLoader.load("./resources/Flamingo.glb", function (gltf) {
+threeGLTFLoader.load("./resources/gem-ufes.glb", function (gltf) {
   model = gltf.scene.children[0];
-  model.name = "Flamingo";
+  model.name = "gem-ufes";
   // const clips = gltf.animations;
 
   // var animation = gltf.animations[0];
@@ -148,13 +184,26 @@ threeGLTFLoader.load("./resources/Flamingo.glb", function (gltf) {
 
   window.addEventListener("arjs-nft-init-data", function (nft) {
     console.log(nft);
-    var msg = nft.detail;
-    model.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0; //y axis?
-    model.position.x = ((msg.width / msg.dpi) * 2.54 * 10) / 2.0; //x axis?
+    // var msg = nft.detail;
+    // model.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0; //y axis?
+    // model.position.x = ((msg.width / msg.dpi) * 2.54 * 10) / 2.0; //x axis?
   });
 
   //////////////////////////////////////////////////////////////////////////////////
-  //		render the whole thing on the page
+  //		stabilização da camera
+  //////////////////////////////////////////////////////////////////////////////////
+
+  // Variáveis para suavização
+  const smoothing = 0.2; // Valor de suavização (ajuste conforme necessário)
+  let positionSmoothed = new THREE.Vector3(); // Posição suavizada
+
+  // Função para atualizar a posição do marcador suavizada
+  function updatePositionSmoothed(newPosition) {
+    positionSmoothed.lerp(newPosition, smoothing);
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////
+  //		renderizar dudo na pagina
   //////////////////////////////////////////////////////////////////////////////////
 
   var animate = function () {
@@ -174,6 +223,25 @@ threeGLTFLoader.load("./resources/Flamingo.glb", function (gltf) {
 
     // update scene.visible if the marker is seen
     scene.visible = camera.visible;
+
+    if (markerControls.object3d.visible) {
+      // Obtenha a matriz de transformação do marcador
+      const markerMatrix = markerControls.object3d.matrixWorld;
+      // Atualize a posição do retângulo com base na posição do marcador
+      const markerPosition = new THREE.Vector3();
+      markerMatrix.decompose(
+        markerPosition,
+        new THREE.Quaternion(),
+        new THREE.Vector3()
+      );
+      // updatePositionSmoothed(markerPosition);
+      // rectangle.position.copy(positionSmoothed);
+
+      // rectangle.position.setFromMatrixPosition(markerMatrix);
+      // rectangle.quaternion.setFromRotationMatrix(markerMatrix);
+      debug.style.display = "block";
+      debug.innerText = JSON.stringify("TEXTO");
+    } else debug.style.display = "none";
 
     renderer.render(scene, camera);
   };
